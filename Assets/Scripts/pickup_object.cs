@@ -4,20 +4,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine;
+
 public class PickupObject : MonoBehaviour
 {
     public GameObject BlockOnPlayer;
+    private bool player_in_range;
+    private bool picked_up;
 
-    private void OnTriggerStay(Collider other)
+    void Start()
     {
-        if (other.gameObject.CompareTag("Player"))
+        picked_up = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) 
         {
-            // Check if 'E' key is held down to pick up the Block
-            if (Input.GetKey(KeyCode.E))
-            {
-                gameObject.SetActive(false);
-                BlockOnPlayer.SetActive(true);
-            }
+            player_in_range = true;
+        };
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            player_in_range = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (player_in_range && Input.GetMouseButtonDown(0) && !picked_up)
+        {
+            BlockOnPlayer.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 }
