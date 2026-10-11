@@ -1,16 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
-public class AddBase : MonoBehaviour
+public class CoffeeSpot : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void OnCupPlaced(CupState cup)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (cup.contents != CupContents.Empty) return;
+        Debug.Log("has coffee");
+        cup.contents = CupContents.Coffee;
     }
 }

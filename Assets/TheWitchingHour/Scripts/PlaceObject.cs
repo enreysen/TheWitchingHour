@@ -8,13 +8,17 @@ public class PlaceObject : MonoBehaviour
     public GameObject cup_highlight;
     public LayerMask spot_mask;
     public float max_distance = 2f;
+    private CupState cupState;
 
+    private void Start()
+    {
+        cupState = cup_world.GetComponent<CupState>();
+    }
     // Update is called once per frame
     void Update()
     {
         //  return if not holding a cup
         if (!cup_held.activeSelf) {
-            Debug.Log("not active");
             cup_highlight.SetActive(false);
             return;
         }; 
@@ -23,7 +27,6 @@ public class PlaceObject : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, max_distance, spot_mask, QueryTriggerInteraction.Collide))
         {
-            Debug.Log("here");
             Transform spot = hit.collider.transform;
             cup_highlight.transform.SetPositionAndRotation(spot.position, spot.rotation);
             cup_highlight.SetActive(true);
@@ -34,6 +37,9 @@ public class PlaceObject : MonoBehaviour
                 cup_world.SetActive(true);
                 cup_held.SetActive(false);
                 cup_highlight.SetActive(false);
+
+                CoffeeSpot coffee = hit.collider.GetComponentInParent<CoffeeSpot>();
+                if (coffee != null) coffee.OnCupPlaced(cupState);
             } 
         }
         else 
