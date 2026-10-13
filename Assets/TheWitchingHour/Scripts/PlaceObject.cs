@@ -40,6 +40,14 @@ public class PlaceObject : MonoBehaviour
 
                 CoffeeSpot coffee = hit.collider.GetComponentInParent<CoffeeSpot>();
                 if (coffee != null) coffee.OnCupPlaced(cupState);
+
+                TeaSpot tea = hit.collider.GetComponentInParent<TeaSpot>();
+                if (tea != null) 
+                {
+                    Vector3 offset = new Vector3(0.50f, 0f, -0.50f);
+                    cup_world.transform.SetPositionAndRotation(spot.position + offset, spot.rotation);
+                    tea.OnCupPlaced(cupState);
+                }
             } 
         }
         else 

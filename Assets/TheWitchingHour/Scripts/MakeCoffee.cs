@@ -8,5 +8,6 @@ public class CoffeeSpot : MonoBehaviour
         if (cup.contents != CupContents.Empty) return;
         Debug.Log("has coffee");
         cup.contents = CupContents.Coffee;
+        cup.ApplyVisuals();
     }
 }
