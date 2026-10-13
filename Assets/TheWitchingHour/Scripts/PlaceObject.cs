@@ -56,6 +56,9 @@ public class PlaceObject : MonoBehaviour
                     cup_world.transform.SetPositionAndRotation(spot.position - offset, spot.rotation);
                     milk.OnCupPlaced(cupState);
                 }
+
+                SinkSpot sink = hit.collider.GetComponentInParent<SinkSpot>();
+                if (sink != null) sink.OnCupPlaced(cupState);
             } 
         }
         else 
