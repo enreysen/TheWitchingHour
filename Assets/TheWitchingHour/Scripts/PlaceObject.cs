@@ -48,6 +48,14 @@ public class PlaceObject : MonoBehaviour
                     cup_world.transform.SetPositionAndRotation(spot.position + offset, spot.rotation);
                     tea.OnCupPlaced(cupState);
                 }
+
+                MilkSpot milk = hit.collider.GetComponentInParent<MilkSpot>();
+                if (milk != null) 
+                {
+                    Vector3 offset = new Vector3(0f, 0f, -0.50f);
+                    cup_world.transform.SetPositionAndRotation(spot.position - offset, spot.rotation);
+                    milk.OnCupPlaced(cupState);
+                }
             } 
         }
         else 

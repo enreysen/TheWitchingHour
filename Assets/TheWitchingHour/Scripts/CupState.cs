@@ -48,10 +48,5 @@ public class CupState : MonoBehaviour
 
         held_visual.SetActive(hasBase);
         world_visual.SetActive(hasBase);
-
-        Debug.Log(world_liquid.material.color);
-        Debug.Log(coffee_color);
-        Debug.Log(tea_color);
-        Debug.Log(milk_color);
     }
 }
