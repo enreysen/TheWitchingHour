@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class CupState : MonoBehaviour
 {
@@ -18,9 +19,21 @@ public class CupState : MonoBehaviour
     public Color tea_color = new Color(0.8157f, 0.9412f, 0.7529f, 1.0f);
     public Color milk_color = new Color(0.95f, 0.95f, 0.9f, 1f);
 
+    public List<ToppingType> toppings = new List<ToppingType>();
+    public int max_toppings = 2;
+    public bool locked;
+
     private void Start()
     {
         ApplyVisuals();
+    }
+
+    public bool AddTopping(ToppingType t){
+        if (locked || contents == CupContents.Empty || toppings.Count >= max_toppings) return false;
+
+        toppings.Add(t);
+        ApplyVisuals();
+        return true;
     }
 
     public void ApplyVisuals()
@@ -30,7 +43,9 @@ public class CupState : MonoBehaviour
         world_liquid.gameObject.SetActive(hasBase);
         held_liquid.gameObject.SetActive(hasBase);
 
-        string label = hasBase ? "Base: " + contents + "\nToppings: None": "Base: None\nToppings: None";
+        string toppings_text = toppings.Count == 0 ? "None": string.Join(", ", toppings);
+
+        string label = hasBase ? "Base: " + contents + "\nToppings: " + toppings_text: "Base: None\nToppings: " + toppings_text;
         world_cup_label.text = label;
         held_cup_label.text = label;
 

@@ -9,6 +9,7 @@ public class PickupObject : MonoBehaviour
     public GameObject BlockOnPlayer;
     private bool player_in_range;
     private bool picked_up;
+    public CarryTopping carrier;
 
     void Start()
     {
@@ -33,7 +34,7 @@ public class PickupObject : MonoBehaviour
 
     private void Update()
     {
-        if (player_in_range && Input.GetMouseButtonDown(0) && !picked_up)
+       if (player_in_range && !carrier.holding && Input.GetMouseButtonDown(1))
         {
             BlockOnPlayer.SetActive(true);
             gameObject.SetActive(false);
