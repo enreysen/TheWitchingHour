@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SinkSpot : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class SinkSpot : MonoBehaviour
     {
         Debug.Log("has rinsed");
         cup.contents = CupContents.Empty;
+        cup.toppings = new List<ToppingType>();
         cup.ApplyVisuals();
     }
 }

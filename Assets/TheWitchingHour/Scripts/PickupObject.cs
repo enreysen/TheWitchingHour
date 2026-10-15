@@ -10,6 +10,9 @@ public class PickupObject : MonoBehaviour
     private bool player_in_range;
     private bool picked_up;
     public CarryTopping carrier;
+    public LayerMask cup_mask;
+    public float max_distance = 3f;
+    public Camera cam;
 
     void Start()
     {
@@ -29,13 +32,17 @@ public class PickupObject : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             player_in_range = false;
+            Debug.Log("set to false");
         }
     }
 
     private void Update()
     {
-       if (player_in_range && !carrier.holding && Input.GetMouseButtonDown(1))
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+       if (player_in_range && !carrier.holding && Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, max_distance, cup_mask, QueryTriggerInteraction.Collide))
         {
+            Debug.Log("here");
             BlockOnPlayer.SetActive(true);
             gameObject.SetActive(false);
         }
