@@ -6,6 +6,7 @@ public class CountdownBar : MonoBehaviour
     public Image progress_bar;
     public float max_time = 30f;
     public Customer customer;
+    public float Fraction => Mathf.Clamp01(remaining / max_time);
 
     private float remaining;
 

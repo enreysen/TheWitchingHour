@@ -53,6 +53,11 @@ public class Customer : MonoBehaviour
             if (cup.toppings.Count == 0) points += 50; // no toppings to add 50 points to level out to 100
         }
 
+        // takes the points player earned and shrinks up to half depending time left on the countdown
+        // serving faster means more points
+        float time_multiplier = 0.5f + 0.5f * countdown.Fraction;
+        points = Mathf.RoundToInt(points * time_multiplier);
+
         OrderDrink();
         return points;
     }
