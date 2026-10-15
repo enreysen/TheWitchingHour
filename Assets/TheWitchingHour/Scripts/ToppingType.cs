@@ -1,6 +1,6 @@
 public enum ToppingType {
     None,
-    DarkChocolate,
+    Chocolate,
     Eyeball,
     Candy,
     Creamer

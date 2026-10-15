@@ -64,4 +64,11 @@ public class CupState : MonoBehaviour
         held_visual.SetActive(hasBase);
         world_visual.SetActive(hasBase);
     }
+
+    public void ResetCup()
+    {
+        contents = CupContents.Empty;
+        toppings.Clear();
+        ApplyVisuals();
+    }
 }

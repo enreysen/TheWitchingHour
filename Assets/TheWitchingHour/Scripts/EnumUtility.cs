@@ -1,0 +1,12 @@
+using System;
+
+public static class EnumUtility
+{
+    public static T GetRandomValue<T>(bool includeFirst = false) where T : Enum
+    {
+        Array values = Enum.GetValues(typeof(T));
+        int start = includeFirst ? 0 : 1;
+        int index = UnityEngine.Random.Range(start, values.Length);
+        return (T)values.GetValue(index);
+    }
+}
