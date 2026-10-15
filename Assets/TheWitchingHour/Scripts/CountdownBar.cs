@@ -1,0 +1,33 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CountdownBar : MonoBehaviour
+{
+    public Image progress_bar;
+    public float max_time = 30f;
+    public Customer customer;
+
+    private float remaining;
+
+    void Start()
+    {
+        ResetTimer();
+    }
+
+    void Update()
+    {
+        remaining -= Time.deltaTime;
+        progress_bar.color = Color.Lerp(Color.red, Color.green, progress_bar.fillAmount);
+        progress_bar.fillAmount = Mathf.Clamp01(remaining / max_time);
+
+        if (remaining <= 0f)
+        {
+            customer.OrderDrink();
+        }
+    }
+
+    public void ResetTimer()
+    {
+        remaining = max_time;
+    }
+}

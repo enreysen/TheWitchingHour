@@ -7,6 +7,7 @@ public class Customer : MonoBehaviour
     public TextMeshPro order_text;
     private CupContents order_base;
     private List<ToppingType> order_toppings = new List<ToppingType>();
+    public CountdownBar countdown;
 
     private void Start()
     {
@@ -31,6 +32,8 @@ public class Customer : MonoBehaviour
 
         string topping_text = order_toppings.Count == 0 ? "None" : string.Join(", ", order_toppings);
         order_text.text = "Base: " + order_base + "\nToppings: " + topping_text;
+
+        if (countdown != null) countdown.ResetTimer();
     }
 
     public int FulfillOrder(CupState cup)
