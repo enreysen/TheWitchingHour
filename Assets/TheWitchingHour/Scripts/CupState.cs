@@ -21,7 +21,9 @@ public class CupState : MonoBehaviour
 
     public List<ToppingType> toppings = new List<ToppingType>();
     public int max_toppings = 2;
-    public bool locked;
+
+    public float locked_until;
+    public bool locked => Time.time < locked_until;
 
     private void Start()
     {
@@ -70,5 +72,10 @@ public class CupState : MonoBehaviour
         contents = CupContents.Empty;
         toppings.Clear();
         ApplyVisuals();
+    }
+
+    public void LockFor(float seconds)
+    {
+        locked_until = Time.time + seconds;
     }
 }

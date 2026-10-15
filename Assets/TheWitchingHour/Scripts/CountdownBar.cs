@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+// time remaining to complete the order
 public class CountdownBar : MonoBehaviour
 {
     public Image progress_bar;

@@ -8,7 +8,7 @@ public class PlaceObject : MonoBehaviour
     public GameObject cup_highlight;
     public LayerMask spot_mask;
     public float max_distance = 2f;
-    private CupState cupState;
+    public CupState cupState;
 
     private void Start()
     {
