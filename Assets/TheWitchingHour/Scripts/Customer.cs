@@ -12,6 +12,7 @@ public class Customer : MonoBehaviour
     public bool order_iced;
     public GameObject customer_visual;
     public float delay_next = 3f;
+    public int customer_completion = 0;
     
     private void Start()
     {
@@ -23,15 +24,28 @@ public class Customer : MonoBehaviour
         order_base = Utility.GetRandomValue<CupContents>();
 
         ToppingType t1 = Utility.GetRandomValue<ToppingType>(true);
-        ToppingType t2 = Utility.GetRandomValue<ToppingType>(true);
+        ToppingType t2 = ToppingType.None;
 
-        while (t1 == ToppingType.Ice){
-            t1 = Utility.GetRandomValue<ToppingType>(true);
+        Debug.Log("customer orders completed: " + customer_completion);
+        if (customer_completion >= 3){  // after completing 3 customers, there is a chance of 2 toppings and always at least 1 topping
+            while (t1 == ToppingType.Ice || t1 == ToppingType.None){
+                t1 = Utility.GetRandomValue<ToppingType>(true);
+            }
+
+            while ((t2 == t1 || t2 == ToppingType.Ice) && t1 != ToppingType.None)
+            {
+                t2 = Utility.GetRandomValue<ToppingType>(true);
+            }
+        } 
+
+        else if (customer_completion > 20){ // win condition
+            Debug.Log("win!"); // TODO: add win screen
         }
-
-        while ((t2 == t1 || t2 == ToppingType.Ice) && t1 != ToppingType.None)
-        {
-            t2 = Utility.GetRandomValue<ToppingType>(true);
+        
+        else { // start level off easy with max 1 topping
+            while (t1 == ToppingType.Ice){
+                t1 = Utility.GetRandomValue<ToppingType>(true);
+            }
         }
 
         order_toppings.Clear();
@@ -80,6 +94,7 @@ public class Customer : MonoBehaviour
         points = Mathf.RoundToInt(points * time_multiplier);
 
         StartCoroutine(NextCustomer());
+        customer_completion += 1;
         return points;
     }
 }
