@@ -23,7 +23,7 @@ public class CustomerInteract : MonoBehaviour
             if (customer != null)
             {
                 score += customer.FulfillOrder(cupState);
-                score_text.text = "Score: " + score.ToString();
+                score_text.text = "Tips: $" + score.ToString();
                 cupState.ResetCup();
             }
         }

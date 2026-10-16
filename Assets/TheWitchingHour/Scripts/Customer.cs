@@ -37,10 +37,6 @@ public class Customer : MonoBehaviour
             }
         } 
 
-        else if (spawner.completed > 20){ // win condition
-            Debug.Log("win!"); // TODO: add win screen
-        }
-        
         else { // start level off easy with max 1 topping
             while (t1 == ToppingType.Ice){
                 t1 = Utility.GetRandomValue<ToppingType>(true);
@@ -61,29 +57,28 @@ public class Customer : MonoBehaviour
 
     public int FulfillOrder(CupState cup)
     {
-        int points = 0;
+        int tips = 0;
 
-        if (cup.contents == order_base) points += 25;
+        if (cup.contents == order_base) tips += 4;
 
-        if (cup.iced == order_iced) points += 25;
+        if (cup.iced == order_iced) tips += 2;
 
         if (order_toppings.Count > 0)
         {
-            int per_topping = 50 / order_toppings.Count;
+            int per_topping = 4 / order_toppings.Count;
             foreach (ToppingType t in order_toppings)
-                if (cup.toppings.Contains(t)) points += per_topping;
+                if (cup.toppings.Contains(t)) tips += per_topping;
         }
         else
         {
-            if (cup.toppings.Count == 0) points += 50; // no toppings to add 50 points to level out to 100
+            if (cup.toppings.Count == 0) tips += 4; // no toppings to add 4 tip to level out to 10 total
         }
 
-        // takes the points player earned and shrinks up to half depending time left on the countdown
-        // serving faster means more points
-        float time_multiplier = 0.5f + 0.5f * countdown.Fraction;
-        points = Mathf.RoundToInt(points * time_multiplier);
+        // less than half of the time left --> half the tips
+        if (countdown.Fraction < 0.50) tips = Mathf.RoundToInt(tips / 2);
 
+        Debug.Log("Total Tip from customer: " + tips);
         spawner.CustomerCompleted(this);
-        return points;
+        return tips;
     }
 }
