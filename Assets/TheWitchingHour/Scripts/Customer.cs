@@ -77,10 +77,11 @@ public class Customer : MonoBehaviour
         }
 
         // less than half of the time left --> half the tips
-        if (countdown.Fraction < 0.50) tips = Mathf.RoundToInt(tips / 2);
+        int tips_time = 0;
+        if (countdown.Fraction < 0.50) tips_time = Mathf.RoundToInt(tips / 2);
 
-        Debug.Log("Total Tip from customer: " + tips);
-        spawner.CustomerLeave(this, true); // completed order
-        return tips;
+        Debug.Log("Total Tip from customer: " + tips_time);
+        spawner.CustomerLeave(this, true, tips); // completed order
+        return tips_time;
     }
 }

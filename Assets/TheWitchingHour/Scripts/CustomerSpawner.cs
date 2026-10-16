@@ -11,6 +11,11 @@ public class CustomerSpawner : MonoBehaviour
     public Transform[] spawn_points;
     private Customer[] occupants;
 
+    public SoundEffects fill_order_perfect;
+    public SoundEffects fill_order_partial;
+    public SoundEffects fill_order_incorrect;
+    private int sound_time = 3;
+
     private void Start()
     {
         occupants = new Customer[spawn_points.Length];
@@ -28,9 +33,15 @@ public class CustomerSpawner : MonoBehaviour
         occupants[slot] = cust;
     }
 
-    public void CustomerLeave(Customer cust, bool complete)
+    public void CustomerLeave(Customer cust, bool complete, int tips = 0)
     {
-        if (complete) completed += 1;
+        if (complete) {
+            completed += 1;
+
+            if (tips == 10) fill_order_perfect.PlayAudio(sound_time);
+            else if (tips > 0) fill_order_partial.PlayAudio(sound_time, 1f);
+            else fill_order_incorrect.PlayAudio(sound_time);
+        } 
 
         occupants[cust.slot] = null;
         Destroy(cust.gameObject);

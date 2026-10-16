@@ -11,6 +11,10 @@ public class CarryTopping : MonoBehaviour {
     private ToppingType held = ToppingType.None;
     public bool holding;
 
+    public SoundEffects add_topping_sound;
+    public SoundEffects add_ice_sound;
+    private int sound_time = 3;
+
     private void Update()
     {
         holding = held != ToppingType.None ? true : false;
@@ -43,7 +47,20 @@ public class CarryTopping : MonoBehaviour {
             else if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, max_distance, cup_mask, QueryTriggerInteraction.Collide))
             {
                 CupState cup = hit.collider.GetComponentInParent<CupState>();
-                if (cup != null && cup.AddTopping(held)) SetHeld(ToppingType.None);
+                if (cup != null && cup.AddTopping(held)) {
+
+                    if (held == ToppingType.Ice) 
+                    {
+                        add_ice_sound.PlayAudio(sound_time);
+                    }
+
+                    else 
+                    {
+                        add_topping_sound.PlayAudio(sound_time);
+                    }
+                    
+                    SetHeld(ToppingType.None);
+                }
             }
         }
     }
