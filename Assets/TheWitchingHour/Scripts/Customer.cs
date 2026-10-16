@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -9,7 +10,9 @@ public class Customer : MonoBehaviour
     private List<ToppingType> order_toppings = new List<ToppingType>();
     public CountdownBar countdown;
     public bool order_iced;
-
+    public GameObject customer_visual;
+    public float delay_next = 3f;
+    
     private void Start()
     {
         OrderDrink();
@@ -43,6 +46,15 @@ public class Customer : MonoBehaviour
         if (countdown != null) countdown.ResetTimer();
     }
 
+    private IEnumerator NextCustomer()
+    {
+        customer_visual.SetActive(false);
+        yield return new WaitForSeconds(delay_next);
+
+        customer_visual.SetActive(true);
+        OrderDrink();
+    }
+
     public int FulfillOrder(CupState cup)
     {
         int points = 0;
@@ -67,7 +79,7 @@ public class Customer : MonoBehaviour
         float time_multiplier = 0.5f + 0.5f * countdown.Fraction;
         points = Mathf.RoundToInt(points * time_multiplier);
 
-        OrderDrink();
+        StartCoroutine(NextCustomer());
         return points;
     }
 }
