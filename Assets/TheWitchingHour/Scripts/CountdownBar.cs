@@ -25,6 +25,7 @@ public class CountdownBar : MonoBehaviour
         if (remaining <= 0f)
         {
             customer.OrderDrink();
+            customer.spawner.CustomerExpired(customer);
         }
     }
 

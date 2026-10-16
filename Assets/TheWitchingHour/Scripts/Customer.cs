@@ -10,9 +10,8 @@ public class Customer : MonoBehaviour
     private List<ToppingType> order_toppings = new List<ToppingType>();
     public CountdownBar countdown;
     public bool order_iced;
-    public GameObject customer_visual;
-    public float delay_next = 3f;
-    public int customer_completion = 0;
+
+    [HideInInspector] public CustomerSpawner spawner; // hide in inspector because spawner assigns it
     
     private void Start()
     {
@@ -26,8 +25,8 @@ public class Customer : MonoBehaviour
         ToppingType t1 = Utility.GetRandomValue<ToppingType>(true);
         ToppingType t2 = ToppingType.None;
 
-        Debug.Log("customer orders completed: " + customer_completion);
-        if (customer_completion >= 3){  // after completing 3 customers, there is a chance of 2 toppings and always at least 1 topping
+        Debug.Log("customer orders completed: " + spawner.completed);
+        if (spawner.completed >= 3){  // after completing 3 customers, there is a chance of 2 toppings and always at least 1 topping
             while (t1 == ToppingType.Ice || t1 == ToppingType.None){
                 t1 = Utility.GetRandomValue<ToppingType>(true);
             }
@@ -38,7 +37,7 @@ public class Customer : MonoBehaviour
             }
         } 
 
-        else if (customer_completion > 20){ // win condition
+        else if (spawner.completed > 20){ // win condition
             Debug.Log("win!"); // TODO: add win screen
         }
         
@@ -58,15 +57,6 @@ public class Customer : MonoBehaviour
         order_text.text = "Base: " + order_base + (order_iced ? " (Iced)" : "") + "\nToppings: " + topping_text;
 
         if (countdown != null) countdown.ResetTimer();
-    }
-
-    private IEnumerator NextCustomer()
-    {
-        customer_visual.SetActive(false);
-        yield return new WaitForSeconds(delay_next);
-
-        customer_visual.SetActive(true);
-        OrderDrink();
     }
 
     public int FulfillOrder(CupState cup)
@@ -93,8 +83,7 @@ public class Customer : MonoBehaviour
         float time_multiplier = 0.5f + 0.5f * countdown.Fraction;
         points = Mathf.RoundToInt(points * time_multiplier);
 
-        StartCoroutine(NextCustomer());
-        customer_completion += 1;
+        spawner.CustomerCompleted(this);
         return points;
     }
 }
