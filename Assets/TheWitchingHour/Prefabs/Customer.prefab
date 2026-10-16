@@ -109,7 +109,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.31, y: -1.14}
+  m_AnchoredPosition: {x: -11.05, y: -1.02}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6856675292798995433
@@ -431,7 +431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.864, y: 0.961}
+  m_AnchoredPosition: {x: -0.05, y: 1.22}
   m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7929910110975832752
@@ -556,6 +556,7 @@ MonoBehaviour:
   order_text: {fileID: 364200628009332360}
   countdown: {fileID: 3870614304205805582}
   order_iced: 0
+  slot: 0
   spawner: {fileID: 0}
 --- !u!114 &3870614304205805582
 MonoBehaviour:

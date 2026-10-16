@@ -11,7 +11,9 @@ public class Customer : MonoBehaviour
     public CountdownBar countdown;
     public bool order_iced;
 
-    [HideInInspector] public CustomerSpawner spawner; // hide in inspector because spawner assigns it
+    // hide in inspector because spawner assigns it
+    [HideInInspector] public int slot;
+    [HideInInspector] public CustomerSpawner spawner;
     
     private void Start()
     {
@@ -78,7 +80,7 @@ public class Customer : MonoBehaviour
         if (countdown.Fraction < 0.50) tips = Mathf.RoundToInt(tips / 2);
 
         Debug.Log("Total Tip from customer: " + tips);
-        spawner.CustomerCompleted(this);
+        spawner.CustomerLeave(this, true); // completed order
         return tips;
     }
 }
