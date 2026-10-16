@@ -3,5 +3,6 @@ public enum ToppingType {
     Chocolate,
     Eyeball,
     Candy,
-    Creamer
+    Creamer,
+    Ice
 }

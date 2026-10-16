@@ -8,6 +8,7 @@ public class Customer : MonoBehaviour
     private CupContents order_base;
     private List<ToppingType> order_toppings = new List<ToppingType>();
     public CountdownBar countdown;
+    public bool order_iced;
 
     private void Start()
     {
@@ -16,22 +17,28 @@ public class Customer : MonoBehaviour
 
     public void OrderDrink()
     {
-        order_base = EnumUtility.GetRandomValue<CupContents>();
+        order_base = Utility.GetRandomValue<CupContents>();
 
-        ToppingType t1 = EnumUtility.GetRandomValue<ToppingType>(true);
-        ToppingType t2 = EnumUtility.GetRandomValue<ToppingType>(true);
+        ToppingType t1 = Utility.GetRandomValue<ToppingType>(true);
+        ToppingType t2 = Utility.GetRandomValue<ToppingType>(true);
 
-        while (t2 == t1 && t1 != ToppingType.None)
+        while (t1 == ToppingType.Ice){
+            t1 = Utility.GetRandomValue<ToppingType>(true);
+        }
+
+        while ((t2 == t1 || t2 == ToppingType.Ice) && t1 != ToppingType.None)
         {
-            t2 = EnumUtility.GetRandomValue<ToppingType>(true);
+            t2 = Utility.GetRandomValue<ToppingType>(true);
         }
 
         order_toppings.Clear();
         if (t1 != ToppingType.None) order_toppings.Add(t1);
         if (t2 != ToppingType.None) order_toppings.Add(t2);
 
+        order_iced = Utility.GetRandomNumber(0, 2) == 0 ? false : true;
+
         string topping_text = order_toppings.Count == 0 ? "None" : string.Join(", ", order_toppings);
-        order_text.text = "Base: " + order_base + "\nToppings: " + topping_text;
+        order_text.text = "Base: " + order_base + (order_iced ? " (Iced)" : "") + "\nToppings: " + topping_text;
 
         if (countdown != null) countdown.ResetTimer();
     }
@@ -40,7 +47,9 @@ public class Customer : MonoBehaviour
     {
         int points = 0;
 
-        if (cup.contents == order_base) points += 50;
+        if (cup.contents == order_base) points += 25;
+
+        if (cup.iced == order_iced) points += 25;
 
         if (order_toppings.Count > 0)
         {

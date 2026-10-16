@@ -25,6 +25,8 @@ public class CupState : MonoBehaviour
     public float locked_until;
     public bool locked => Time.time < locked_until;
 
+    public bool iced;
+
     private void Start()
     {
         ApplyVisuals();
@@ -32,6 +34,13 @@ public class CupState : MonoBehaviour
 
     public bool AddTopping(ToppingType t){
         if (locked || contents == CupContents.Empty || toppings.Count >= max_toppings) return false;
+
+        if (t == ToppingType.Ice){
+            if (iced) return false;
+            iced = true;
+            ApplyVisuals();
+            return true;
+        }
 
         toppings.Add(t);
         ApplyVisuals();
@@ -47,7 +56,7 @@ public class CupState : MonoBehaviour
 
         string toppings_text = toppings.Count == 0 ? "None": string.Join(", ", toppings);
 
-        string label = hasBase ? "Base: " + contents + "\nToppings: " + toppings_text: "Base: None\nToppings: " + toppings_text;
+        string label = hasBase ? "Base: " + contents + (iced ? " (Iced)" : "") + "\nToppings: " + toppings_text: "Base: None\nToppings: " + toppings_text;
         world_cup_label.text = label;
         held_cup_label.text = label;
 
@@ -70,6 +79,7 @@ public class CupState : MonoBehaviour
     public void ResetCup()
     {
         contents = CupContents.Empty;
+        iced = false;
         toppings.Clear();
         ApplyVisuals();
     }
