@@ -924,7 +924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TeaSpot
   cooldown_visual: {fileID: 181603963}
-  seconds: 3
+  seconds: 6
 --- !u!114 &181603963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7039,7 +7039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MilkSpot
   cooldown_visual: {fileID: 1173156824}
-  seconds: 3
+  seconds: 1.5
 --- !u!114 &1173156824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11063,7 +11063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SinkSpot
   cupState: {fileID: 1711163744}
   cooldown_visual: {fileID: 2073464011}
-  seconds: 3
+  seconds: 1.5
 --- !u!114 &2073464011
 MonoBehaviour:
   m_ObjectHideFlags: 0

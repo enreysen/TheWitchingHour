@@ -3,7 +3,7 @@ using UnityEngine;
 public class MilkSpot : MonoBehaviour
 {
     public CooldownVisual cooldown_visual;
-    public float seconds = 3f;
+    public float seconds = 1.5f; // milk fastest
 
     public void OnCupPlaced(CupState cup)
         {

@@ -556,9 +556,7 @@ MonoBehaviour:
   order_text: {fileID: 364200628009332360}
   countdown: {fileID: 3870614304205805582}
   order_iced: 0
-  customer_visual: {fileID: 4464012095501624684}
-  delay_next: 2
-  customer_completion: 0
+  spawner: {fileID: 0}
 --- !u!114 &3870614304205805582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CountdownBar
   progress_bar: {fileID: 1581200741513938847}
-  max_time: 60
+  max_time: 30
   customer: {fileID: 6288255604522948078}
 --- !u!1 &6763363977997831981
 GameObject:

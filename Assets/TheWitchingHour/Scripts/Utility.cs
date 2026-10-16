@@ -2,11 +2,23 @@ using System;
 
 public static class Utility
 {
-    public static T GetRandomValue<T>(bool includeFirst = false) where T : Enum
+    public static T GetRandomValue<T>(bool includeFirst = false, int length = 11) where T : Enum
     {
         Array values = Enum.GetValues(typeof(T));
         int start = includeFirst ? 0 : 1;
-        int index = UnityEngine.Random.Range(start, values.Length);
+        int index = UnityEngine.Random.Range(start, length);
+
+        // milk and coffee equal chance (40%), tea less chance (20%)
+        if (index <= 4){
+            index = 1;
+        }
+        else if (index > 4 && index <= 8){
+            index = 2;
+        }
+        else {
+            index = 3;
+        }
+            
         return (T)values.GetValue(index);
     }
 
