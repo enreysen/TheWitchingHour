@@ -30,6 +30,10 @@ public class CustomerSpawner : MonoBehaviour
         cust.spawner = this;
 
         cust.slot = slot;
+
+        CustomerType type = Utility.GetRandomCustomerType<CustomerType>();
+        cust.SetType(type);
+
         occupants[slot] = cust;
     }
 

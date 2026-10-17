@@ -2,6 +2,15 @@ using System;
 
 public static class Utility
 {
+
+    public static T GetRandomCustomerType<T>() where T : Enum
+    {
+        Array values = Enum.GetValues(typeof(T));
+        int index = UnityEngine.Random.Range(0, values.Length);
+
+        return (T)values.GetValue(index);
+    }
+
     public static T GetRandomValue<T>(bool includeFirst = false, int length = 11) where T : Enum
     {
         Array values = Enum.GetValues(typeof(T));

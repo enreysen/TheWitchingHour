@@ -14,6 +14,13 @@ public class Customer : MonoBehaviour
     // hide in inspector because spawner assigns it
     [HideInInspector] public int slot;
     [HideInInspector] public CustomerSpawner spawner;
+
+    // customer skins
+    public GameObject ghost_skin;
+    public GameObject werewolf_skin;
+    public GameObject vampire_skin;
+    public GameObject zombie_skin;
+    [HideInInspector] public CustomerType customer_type;
     
     private void Start()
     {
@@ -84,4 +91,23 @@ public class Customer : MonoBehaviour
         spawner.CustomerLeave(this, true, tips); // completed order
         return tips_time;
     }
+
+    public void SetType(CustomerType type)
+    {
+        customer_type = type;
+
+        ghost_skin.SetActive(false);
+        werewolf_skin.SetActive(false);
+        vampire_skin.SetActive(false);
+        zombie_skin.SetActive(false);
+
+        switch (type)
+        {
+            case CustomerType.Ghost:    ghost_skin.SetActive(true);    break;
+            case CustomerType.Werewolf: werewolf_skin.SetActive(true); break;
+            case CustomerType.Vampire:  vampire_skin.SetActive(true);  break;
+            case CustomerType.Zombie:   zombie_skin.SetActive(true);   break;
+        }
+    }
+
 }
