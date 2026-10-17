@@ -7,7 +7,6 @@ public class CoffeeSpot : MonoBehaviour
     public CooldownVisual cooldown_visual;
     public float seconds = 3f;
     public SoundEffects sound;
-
     public BewerageMaker maker;
 
     public void OnCupPlaced(CupState cup)
@@ -31,6 +30,7 @@ public class CoffeeSpot : MonoBehaviour
 
         Debug.Log("coffee");
         cup.contents = CupContents.Coffee;
+        maker.UnSetTheCup(); // need to unset cup for animation to work for next time
         cup.ApplyVisuals();
     }
 }
