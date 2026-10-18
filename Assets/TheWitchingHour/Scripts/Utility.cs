@@ -27,8 +27,8 @@ public static class Utility
         if (randomBase) // 45% chance coffee and milk, 10% tea
         {
             int roll = UnityEngine.Random.Range(0, 10);
-            if (roll < 5) index = 1;
-            else if (roll < 9) index = 2;
+            if (roll < 3) index = 1;
+            else if (roll < 8) index = 2;
             else index = 3;
         }
 

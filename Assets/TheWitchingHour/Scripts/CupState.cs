@@ -33,7 +33,7 @@ public class CupState : MonoBehaviour
     }
 
     public bool AddTopping(ToppingType t){
-        if (locked || contents == CupContents.Empty || toppings.Count >= max_toppings) return false;
+        if (locked || contents == CupContents.Empty);
 
         if (t == ToppingType.Ice){
             if (iced) return false;
@@ -41,6 +41,8 @@ public class CupState : MonoBehaviour
             ApplyVisuals();
             return true;
         }
+
+        if (toppings.Count >= max_toppings) return false;
 
         toppings.Add(t);
         ApplyVisuals();

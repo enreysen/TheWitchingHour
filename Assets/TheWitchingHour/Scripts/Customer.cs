@@ -29,15 +29,15 @@ public class Customer : MonoBehaviour
 
     public void OrderDrink(bool resetTimer = true)
     {
-        order_base = Utility.GetRandomValue<CupContents>();
+        order_base = Utility.GetRandomValue<CupContents>(false, true); // don't include first, random base
 
-        ToppingType t1 = Utility.GetRandomValue<ToppingType>(true);
+        ToppingType t1 = Utility.GetRandomValue<ToppingType>(true, false); // include first (none) not a random base
         ToppingType t2 = ToppingType.None;
 
         Debug.Log("customer orders completed: " + spawner.completed);
         if (spawner.completed >= 3){  // after completing 3 customers, there is a chance of 2 toppings and always at least 1 topping
             while (t1 == ToppingType.Ice || t1 == ToppingType.None){
-                t1 = Utility.GetRandomValue<ToppingType>(true);
+                t1 = Utility.GetRandomValue<ToppingType>(false, false); // don't include first (none) not a random base
             }
             // vampires always have two toppings -- at least one eyeball
             if (customer_type != CustomerType.Vampire) while ((t2 == t1 || t2 == ToppingType.Ice) && t1 != ToppingType.None) t2 = Utility.GetRandomValue<ToppingType>(true);
@@ -46,7 +46,7 @@ public class Customer : MonoBehaviour
 
         else { // start level off easy with max 1 topping
             while (t1 == ToppingType.Ice){
-                t1 = Utility.GetRandomValue<ToppingType>(true);
+                t1 = Utility.GetRandomValue<ToppingType>(true, false); // include first (none) not a random base
             }
         }
 
