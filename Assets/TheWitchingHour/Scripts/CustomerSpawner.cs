@@ -65,7 +65,7 @@ public class CustomerSpawner : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             bool pack_mentality = WerewolfPresent();
-            int chance = pack_mentality ? 10 : 30;
+            int chance = pack_mentality ? 20 : 30;
 
             if (completed > 2) { // wait until 2 customers for chance of extra customers
 
