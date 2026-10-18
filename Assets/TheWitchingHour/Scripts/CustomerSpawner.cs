@@ -16,6 +16,7 @@ public class CustomerSpawner : MonoBehaviour
     public SoundEffects fill_order_incorrect;
     public SoundEffects customer_left;
     public SoundEffects customer_arriving;
+    public SoundEffects howl;
     private int sound_time = 3;
 
     private void Start()
@@ -37,7 +38,8 @@ public class CustomerSpawner : MonoBehaviour
     
         cust.SetType(type);
 
-        customer_arriving.PlayAudio(sound_time);
+        if (type != CustomerType.Werewolf) customer_arriving.PlayAudio(sound_time);
+        else howl.PlayAudio(sound_time);
         occupants[slot] = cust;
     }
 
