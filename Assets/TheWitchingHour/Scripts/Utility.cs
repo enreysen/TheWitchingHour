@@ -3,10 +3,18 @@ using System;
 public static class Utility
 {
 
-    public static T GetRandomCustomerType<T>(int end = 4) where T : Enum
+    public static T GetRandomCustomerType<T>(int end = 4, bool pack_mentality = false) where T : Enum
     {
         Array values = Enum.GetValues(typeof(T));
+
         int index = UnityEngine.Random.Range(0, end);
+
+        if (pack_mentality)
+        {
+            int num = UnityEngine.Random.Range(0, 2); // wolf 50% chance spawning next time
+            if (num == 0) return (T)values.GetValue(3); // wolf at index 3
+            else index = UnityEngine.Random.Range(0, 3); // 50% chance something else
+        }
 
         return (T)values.GetValue(index);
     }
@@ -16,11 +24,11 @@ public static class Utility
         Array values = Enum.GetValues(typeof(T));
         int index;
 
-        if (randomBase) // 40% chance coffee and milk, 20% tea
+        if (randomBase) // 45% chance coffee and milk, 10% tea
         {
             int roll = UnityEngine.Random.Range(0, 10);
-            if (roll < 4) index = 1;
-            else if (roll < 8) index = 2;
+            if (roll < 5) index = 1;
+            else if (roll < 9) index = 2;
             else index = 3;
         }
 

@@ -29,13 +29,10 @@ public class CustomerSpawner : MonoBehaviour
         Customer cust = Instantiate(customer_prefab, point.position, point.rotation);
         cust.spawner = this;
 
-        bool pack_mentality = WerewolfPresent();
+        bool pack_mentality = HigherWolfChance();
         cust.slot = slot;
-        CustomerType type = CustomerType.Werewolf;
-        if (!pack_mentality) {
-            type = (completed > 3) ? Utility.GetRandomCustomerType<CustomerType>() : Utility.GetRandomCustomerType<CustomerType>(2);
-        }
-        
+        CustomerType type = (completed > 3) ? Utility.GetRandomCustomerType<CustomerType>(4, pack_mentality) : Utility.GetRandomCustomerType<CustomerType>(2);
+    
         cust.SetType(type);
 
         occupants[slot] = cust;
@@ -64,7 +61,7 @@ public class CustomerSpawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            bool pack_mentality = WerewolfPresent();
+            bool pack_mentality = HigherWolfChance();
             int chance = pack_mentality ? 20 : 30;
 
             if (completed > 2) { // wait until 2 customers for chance of extra customers
@@ -86,12 +83,15 @@ public class CustomerSpawner : MonoBehaviour
         first_slot_filled = false;
     }
 
-    private bool WerewolfPresent()
+    private bool HigherWolfChance()
     {
+        int count = 0;
         foreach (Customer c in occupants)
         {
-            if (c != null && c.customer_type == CustomerType.Werewolf) return true;
+            if (c != null && c.customer_type == CustomerType.Werewolf) count+=1;
         }
-        return false;
+
+        if (count > 2) return false;
+        else return true;
     }
 }
