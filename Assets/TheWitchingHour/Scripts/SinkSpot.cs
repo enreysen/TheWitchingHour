@@ -15,7 +15,7 @@ public class SinkSpot : MonoBehaviour
         cooldown_visual.ShowVisual(seconds);
         sound.PlayAudio(6f, 1.5f);
 
-        Debug.Log("washed");
+        //Debug.Log("washed");
         cupState.ResetCup();
     }
 }

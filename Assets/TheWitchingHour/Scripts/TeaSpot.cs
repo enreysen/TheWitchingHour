@@ -34,7 +34,7 @@ public class TeaSpot : MonoBehaviour
         
 
         yield return new WaitForSeconds(seconds / 2);
-        Debug.Log("tea");
+        //Debug.Log("tea");
         cup.contents = CupContents.Tea;
         maker.UnSetTheCup(); // need to unset cup for animation to work for next time
         cup.ApplyVisuals();

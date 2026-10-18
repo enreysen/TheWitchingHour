@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CustomerInteract : MonoBehaviour
 {
@@ -9,11 +10,12 @@ public class CustomerInteract : MonoBehaviour
     public LayerMask customerMask;
     public float maxDistance = 3f;
     public TextMeshProUGUI score_text;
-    public float score;
+    public float score = 0;
 
     private void Update()
     {
         if (!heldCup.activeSelf || cupState.contents == CupContents.Empty || !Input.GetMouseButtonDown(0)) return;
+        if (score >= 250) SceneManager.LoadScene("Win");
 
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
@@ -25,6 +27,7 @@ public class CustomerInteract : MonoBehaviour
                 score += customer.FulfillOrder(cupState);
                 score_text.text = "Tips: $" + score.ToString();
                 cupState.ResetCup();
+                
             }
         }
     }

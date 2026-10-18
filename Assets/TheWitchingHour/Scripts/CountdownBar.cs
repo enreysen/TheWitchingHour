@@ -16,7 +16,7 @@ public class CountdownBar : MonoBehaviour
     void Start()
     {
         max_time = customer.customer_type != CustomerType.Zombie ? 30f : 60f;
-        Debug.Log("Customer Type: " + customer.customer_type + " Max Time: " + max_time);
+        //Debug.Log("Customer Type: " + customer.customer_type + " Max Time: " + max_time);
         ResetTimer();
     }
 

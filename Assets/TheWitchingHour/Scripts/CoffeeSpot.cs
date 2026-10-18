@@ -28,7 +28,7 @@ public class CoffeeSpot : MonoBehaviour
 
         yield return new WaitForSeconds(seconds);
 
-        Debug.Log("coffee");
+        //Debug.Log("coffee");
         cup.contents = CupContents.Coffee;
         cup.ApplyVisuals();
 

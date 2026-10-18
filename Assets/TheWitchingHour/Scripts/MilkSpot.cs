@@ -29,7 +29,7 @@ public class MilkSpot : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        Debug.Log("milk");
+        //Debug.Log("milk");
         cup.contents = CupContents.Milk;
         maker.UnSetTheCup(); // need to unset cup for animation to work for next time
         cup.ApplyVisuals();
