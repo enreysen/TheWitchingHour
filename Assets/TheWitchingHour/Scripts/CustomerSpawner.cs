@@ -29,8 +29,12 @@ public class CustomerSpawner : MonoBehaviour
         Customer cust = Instantiate(customer_prefab, point.position, point.rotation);
         cust.spawner = this;
 
+        bool pack_mentality = WerewolfPresent();
         cust.slot = slot;
-        CustomerType type = (completed > 3) ? Utility.GetRandomCustomerType<CustomerType>() : Utility.GetRandomCustomerType<CustomerType>(2);
+        CustomerType type = CustomerType.Werewolf;
+        if (!pack_mentality) {
+            type = (completed > 3) ? Utility.GetRandomCustomerType<CustomerType>() : Utility.GetRandomCustomerType<CustomerType>(2);
+        }
         
         cust.SetType(type);
 
