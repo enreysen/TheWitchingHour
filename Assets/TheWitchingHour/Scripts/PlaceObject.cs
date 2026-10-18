@@ -10,6 +10,9 @@ public class PlaceObject : MonoBehaviour
     public float max_distance = 2f;
     public CupState cupState;
 
+    public SoundEffects place_sound;
+    public float sound_time = 3f;
+
     private void Start()
     {
         cupState = cup_world.GetComponent<CupState>();
@@ -33,6 +36,8 @@ public class PlaceObject : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                place_sound.PlayAudio(sound_time);
+
                 cup_world.transform.SetPositionAndRotation(spot.position, spot.rotation);
                 cup_world.SetActive(true);
                 cup_held.SetActive(false);

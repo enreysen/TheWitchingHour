@@ -14,6 +14,8 @@ public class CustomerSpawner : MonoBehaviour
     public SoundEffects fill_order_perfect;
     public SoundEffects fill_order_partial;
     public SoundEffects fill_order_incorrect;
+    public SoundEffects customer_left;
+    public SoundEffects customer_arriving;
     private int sound_time = 3;
 
     private void Start()
@@ -35,6 +37,7 @@ public class CustomerSpawner : MonoBehaviour
     
         cust.SetType(type);
 
+        customer_arriving.PlayAudio(sound_time);
         occupants[slot] = cust;
     }
 
@@ -47,6 +50,9 @@ public class CustomerSpawner : MonoBehaviour
             else if (tips > 0) fill_order_partial.PlayAudio(sound_time, 1f);
             else fill_order_incorrect.PlayAudio(sound_time);
         } 
+        else {
+            customer_left.PlayAudio(sound_time);
+        }
 
         occupants[cust.slot] = null;
         Destroy(cust.gameObject);

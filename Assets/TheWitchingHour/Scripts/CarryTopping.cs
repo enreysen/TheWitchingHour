@@ -13,6 +13,9 @@ public class CarryTopping : MonoBehaviour {
 
     public SoundEffects add_topping_sound;
     public SoundEffects add_ice_sound;
+    public SoundEffects pickup_sound;
+    public SoundEffects place_sound;
+
     private int sound_time = 3;
 
     private void Update()
@@ -28,7 +31,11 @@ public class CarryTopping : MonoBehaviour {
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, max_distance, topping_mask, QueryTriggerInteraction.Collide))
             {
                 ToppingSource src = hit.collider.GetComponentInParent<ToppingSource>();
-                if (src != null) SetHeld(src.type);
+                if (src != null) 
+                {
+                    pickup_sound.PlayAudio(3f, 0.2f);
+                    SetHeld(src.type);
+                }
             }
         }
         else
@@ -36,12 +43,19 @@ public class CarryTopping : MonoBehaviour {
             if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit0, max_distance, topping_mask, QueryTriggerInteraction.Collide))
             {
                 ToppingSource src = hit0.collider.GetComponentInParent<ToppingSource>();
-
+                
                 // clicking again on the topping removes it
-                if (src.type == held) SetHeld(ToppingType.None);
+                if (src.type == held) 
+                { 
+                    place_sound.PlayAudio(3f);
+                    SetHeld(ToppingType.None);
+                }
             
                 // clicking on another topping with topping in hand picks up other topping
-                else if (src.type != held)  SetHeld(src.type);
+                else if (src.type != held){
+                    pickup_sound.PlayAudio(3f, 0.2f);
+                    SetHeld(src.type);
+                }
             }
 
             else if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out RaycastHit hit, max_distance, cup_mask, QueryTriggerInteraction.Collide))
