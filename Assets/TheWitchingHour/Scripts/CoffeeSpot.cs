@@ -30,7 +30,9 @@ public class CoffeeSpot : MonoBehaviour
 
         Debug.Log("coffee");
         cup.contents = CupContents.Coffee;
-        maker.UnSetTheCup(); // need to unset cup for animation to work for next time
         cup.ApplyVisuals();
+
+        yield return new WaitForSeconds(1); // added this to fix animation issue
+        maker.UnSetTheCup(); // need to unset cup for animation to work for next time
     }
 }

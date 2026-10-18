@@ -27,7 +27,7 @@ public class Customer : MonoBehaviour
         OrderDrink();
     }
 
-    public void OrderDrink()
+    public void OrderDrink(bool resetTimer = true)
     {
         order_base = Utility.GetRandomValue<CupContents>();
 
@@ -39,11 +39,9 @@ public class Customer : MonoBehaviour
             while (t1 == ToppingType.Ice || t1 == ToppingType.None){
                 t1 = Utility.GetRandomValue<ToppingType>(true);
             }
-
-            while ((t2 == t1 || t2 == ToppingType.Ice) && t1 != ToppingType.None)
-            {
-                t2 = Utility.GetRandomValue<ToppingType>(true);
-            }
+            // vampires always have two toppings -- at least one eyeball
+            if (customer_type != CustomerType.Vampire) while ((t2 == t1 || t2 == ToppingType.Ice) && t1 != ToppingType.None) t2 = Utility.GetRandomValue<ToppingType>(true);
+            else t2 = ToppingType.Eyeball;
         } 
 
         else { // start level off easy with max 1 topping
@@ -56,18 +54,20 @@ public class Customer : MonoBehaviour
         if (t1 != ToppingType.None) order_toppings.Add(t1);
         if (t2 != ToppingType.None) order_toppings.Add(t2);
 
-        order_iced = Utility.GetRandomNumber(0, 2) == 0 ? false : true;
+        // Vampires always iced, ghosts always warm. zombies and werewolves can ask for either
+        if (customer_type != CustomerType.Ghost && customer_type != CustomerType.Vampire) order_iced = Utility.GetRandomNumber(0, 2) == 0 ? false : true;
+        else order_iced = customer_type == CustomerType.Ghost ? false : true;
 
         string topping_text = order_toppings.Count == 0 ? "None" : string.Join(", ", order_toppings);
         order_text.text = "Base: " + order_base + (order_iced ? " (Iced)" : "") + "\nToppings: " + topping_text;
 
-        if (countdown != null) countdown.ResetTimer();
+        if (countdown != null && resetTimer) countdown.ResetTimer();
     }
 
     public int FulfillOrder(CupState cup)
     {
         int tips = 0;
-
+        
         if (cup.contents == order_base) tips += 4;
 
         if (cup.iced == order_iced) tips += 2;
@@ -85,10 +85,13 @@ public class Customer : MonoBehaviour
 
         // less than half of the time left --> half the tips
         int tips_time = 0;
-        if (countdown.Fraction < 0.50) tips_time = Mathf.RoundToInt(tips / 2);
+        tips_time = countdown.Fraction < 0.50 ? Mathf.RoundToInt(tips / 2) : tips;
+
+        // vampires tip well, werewolves tip poorly
+        if (customer_type == CustomerType.Vampire || customer_type == CustomerType.Werewolf) tips_time = customer_type == CustomerType.Vampire ? Mathf.RoundToInt(tips_time * 2) : Mathf.RoundToInt(tips_time / 2);
 
         Debug.Log("Total Tip from customer: " + tips_time);
-        spawner.CustomerLeave(this, true, tips); // completed order
+        spawner.CustomerLeave(this, true, tips); // completed order (original tip value to play sound based on accuracy of order)
         return tips_time;
     }
 

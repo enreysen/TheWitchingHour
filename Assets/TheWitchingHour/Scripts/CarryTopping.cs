@@ -73,7 +73,7 @@ public class CarryTopping : MonoBehaviour {
         for (int i = 0; i < held_visuals.Length; i++){
             if (held_visuals[i] != null){
                 held_visuals[i].SetActive(i == (int)t);
-                Debug.Log("slot " + i + " = " + held_visuals[i].name + " active=" + (i == (int)t), held_visuals[i]);
+                //Debug.Log("slot " + i + " = " + held_visuals[i].name + " active=" + (i == (int)t), held_visuals[i]);
             } 
         }
     }
