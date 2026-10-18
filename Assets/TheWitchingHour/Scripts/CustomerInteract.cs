@@ -15,7 +15,6 @@ public class CustomerInteract : MonoBehaviour
     private void Update()
     {
         if (!heldCup.activeSelf || cupState.contents == CupContents.Empty || !Input.GetMouseButtonDown(0)) return;
-        if (score >= 250) SceneManager.LoadScene("Win");
 
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
 
@@ -26,6 +25,7 @@ public class CustomerInteract : MonoBehaviour
             {
                 score += customer.FulfillOrder(cupState);
                 score_text.text = "Tips: $" + score.ToString();
+                if (score >= 200) SceneManager.LoadScene("Win");
                 cupState.ResetCup();
                 
             }
