@@ -765,7 +765,7 @@ MonoBehaviour:
   customer_left: {fileID: 729640426}
   customer_arriving: {fileID: 1744699664}
   howl: {fileID: 169878137}
-  is_tutorial: 0
+  tutorial_mode: 0
 --- !u!1001 &103066341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12650,7 +12650,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.622
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12658,11 +12658,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.612
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.45591736
+      value: 0.92946535
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -12670,7 +12670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.89002216
+      value: -0.36890948
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalRotation.z
@@ -12682,7 +12682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 125.752
+      value: -43.297
       objectReference: {fileID: 0}
     - target: {fileID: 4966995758405482, guid: fbbf1aaff00e94748a4a8f9d6a37714d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -12936,8 +12936,8 @@ Transform:
   m_GameObject: {fileID: 1173156819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.28868008, y: 0.41611457, z: -2.7188606}
-  m_LocalScale: {x: 0.36214995, y: 0.01691, z: 0.28465998}
+  m_LocalPosition: {x: -0.421, y: 0.636, z: -2.7188606}
+  m_LocalScale: {x: 0.36214995, y: 0.4929784, z: 0.28465998}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 428905660}

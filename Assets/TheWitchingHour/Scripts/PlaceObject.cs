@@ -57,7 +57,7 @@ public class PlaceObject : MonoBehaviour
                 MilkSpot milk = hit.collider.GetComponentInParent<MilkSpot>();
                 if (milk != null) 
                 {
-                    Vector3 offset = new Vector3(0f, 0.05f, -0.769f);
+                    Vector3 offset = new Vector3(0f, 0.30f, -0.769f);
                     cup_world.transform.SetPositionAndRotation(spot.position - offset, spot.rotation);
                     milk.OnCupPlaced(cupState);
                 }
