@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustomerSpawner : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class CustomerSpawner : MonoBehaviour
     public SoundEffects customer_arriving;
     public SoundEffects howl;
     private int sound_time = 3;
-
+    public bool tutorial_mode;
+    
     private void Start()
     {
         occupants = new Customer[spawn_points.Length];
@@ -34,8 +36,12 @@ public class CustomerSpawner : MonoBehaviour
 
         bool pack_mentality = HigherWolfChance();
         cust.slot = slot;
+        cust.is_tutorial = tutorial_mode;
+
         CustomerType type = (completed > 3) ? Utility.GetRandomCustomerType<CustomerType>(4, pack_mentality) : Utility.GetRandomCustomerType<CustomerType>(2);
-    
+
+        if (tutorial_mode) type = CustomerType.Ghost;
+
         cust.SetType(type);
 
         if (type != CustomerType.Werewolf) customer_arriving.PlayAudio(sound_time);
@@ -45,6 +51,8 @@ public class CustomerSpawner : MonoBehaviour
 
     public void CustomerLeave(Customer cust, bool complete, int tips = 0)
     {
+        if (tutorial_mode) SceneManager.LoadScene("Instructions 2");; // activate the in-between scene
+
         if (complete) {
             completed += 1;
 

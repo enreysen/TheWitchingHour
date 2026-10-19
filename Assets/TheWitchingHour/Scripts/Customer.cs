@@ -21,6 +21,7 @@ public class Customer : MonoBehaviour
     public GameObject vampire_skin;
     public GameObject zombie_skin;
     [HideInInspector] public CustomerType customer_type;
+    [HideInInspector] public bool is_tutorial;
     
     private void Start()
     {
@@ -29,6 +30,20 @@ public class Customer : MonoBehaviour
 
     public void OrderDrink(bool resetTimer = true)
     {
+        if (is_tutorial)
+        {
+            order_base = CupContents.Coffee;
+            order_iced = true;
+            order_toppings.Clear();
+
+            order_text.text = "Base: Coffee (Iced)\nToppings: None";
+            if (countdown != null) {
+                countdown.ResetTimer();
+                countdown.paused = is_tutorial;
+            }
+            return;
+        }
+
         order_base = Utility.GetRandomValue<CupContents>(false, true); // don't include first, random base
 
         ToppingType t1 = Utility.GetRandomValue<ToppingType>(true, false); // include first (none) not a random base

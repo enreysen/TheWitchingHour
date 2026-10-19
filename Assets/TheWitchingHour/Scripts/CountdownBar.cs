@@ -12,6 +12,7 @@ public class CountdownBar : MonoBehaviour
     public SoundEffects zombie_switch;
     public float sound_time;
     private bool zombie_restart = false;
+    public bool paused;
 
     void Start()
     {
@@ -22,6 +23,8 @@ public class CountdownBar : MonoBehaviour
 
     void Update()
     {
+        if (paused) return;
+        
         remaining -= Time.deltaTime;
         progress_bar.color = Color.Lerp(Color.red, Color.green, progress_bar.fillAmount);
         progress_bar.fillAmount = Mathf.Clamp01(remaining / max_time);

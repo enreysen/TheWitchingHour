@@ -765,6 +765,7 @@ MonoBehaviour:
   customer_left: {fileID: 729640426}
   customer_arriving: {fileID: 1744699664}
   howl: {fileID: 169878137}
+  is_tutorial: 0
 --- !u!1001 &103066341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11878,6 +11879,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1481215465}
   - {fileID: 822704426}
   - {fileID: 1020708422}
   - {fileID: 2119828575}
@@ -14879,12 +14881,12 @@ Transform:
   m_GameObject: {fileID: 1481215464}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.50512, y: 0.22465467, z: 0.80698013}
+  m_LocalPosition: {x: 1.94, y: 2.46, z: 2.8400002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1089049412}
-  m_Father: {fileID: 1558682953}
+  m_Father: {fileID: 991122277}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1481215466
 MonoBehaviour:
@@ -15415,7 +15417,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1481215465}
   - {fileID: 211254302}
   - {fileID: 27054230}
   - {fileID: 181603959}
