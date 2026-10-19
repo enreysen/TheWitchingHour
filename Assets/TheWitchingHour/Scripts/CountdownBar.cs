@@ -16,7 +16,7 @@ public class CountdownBar : MonoBehaviour
 
     void Start()
     {
-        max_time = customer.customer_type != CustomerType.Zombie ? 30f : 60f;
+        max_time = 30f;
         //Debug.Log("Customer Type: " + customer.customer_type + " Max Time: " + max_time);
         ResetTimer();
     }
@@ -35,8 +35,8 @@ public class CountdownBar : MonoBehaviour
             customer.spawner.CustomerLeave(customer, false); // expired customer
             zombie_restart = false;
         }
-        // zombies will change their mind with 1/3 time remaining
-        else if (remaining <= max_time / 3 && customer.customer_type == CustomerType.Zombie && !zombie_restart){
+        // zombies will change their mind with 1/2 time remaining
+        else if (remaining <= max_time / 2 && customer.customer_type == CustomerType.Zombie && !zombie_restart){
             customer.OrderDrink(false);
             zombie_switch.PlayAudio(3);
             zombie_restart = true;
