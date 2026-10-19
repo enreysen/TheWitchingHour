@@ -40,6 +40,11 @@ public class PauseMenu : MonoBehaviour
             controls.SetActive(false);
             second_menu = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Application.Quit();
+        }
     }
 
     void PauseGame()
