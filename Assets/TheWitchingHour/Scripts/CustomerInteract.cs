@@ -25,7 +25,7 @@ public class CustomerInteract : MonoBehaviour
             {
                 score += customer.FulfillOrder(cupState);
                 score_text.text = "Tips: $" + score.ToString();
-                if (score >= 200) SceneManager.LoadScene("Win");
+                if (score >= 250) SceneManager.LoadScene("Win");
                 cupState.ResetCup();
                 
             }
